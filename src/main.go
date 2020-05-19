@@ -35,9 +35,9 @@ func mode_choice() int {
 	}
 	return game_mode
 }
-func base_win_check(k int, h int, p int) bool{
-	counter:=0
-	answer:=false
+func base_win_check(k int, h int, p int) bool {
+	counter := 0
+	answer := false
 	for i := 0; i < 3; i++ {
 		if game_board[i+k+h][i+k+h] == point {
 			counter++
@@ -113,25 +113,25 @@ func base_win_check(k int, h int, p int) bool{
 	return answer
 }
 func win_check() bool {
-	answer:=false
+	answer := false
 	if board_size == 3 {
-		if base_win_check(0, 0,3) == true {
+		if base_win_check(0, 0, 3) == true {
 			answer = true
 		}
 	}
 	if board_size == 4 {
 		for k := 0; k < 2; k++ {
 			for h := 0; h < 2; h++ {
-				if base_win_check(k,h,3) == true {
+				if base_win_check(k, h, 3) == true {
 					answer = true
 				}
 			}
 		}
-			}
+	}
 	if board_size == 6 {
 		for k := 0; k < 2; k++ {
 			for h := 0; h < 2; h++ {
-				if base_win_check(k,h,4) == true {
+				if base_win_check(k, h, 4) == true {
 					answer = true
 				}
 			}
