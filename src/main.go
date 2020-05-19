@@ -35,317 +35,108 @@ func mode_choice() int {
 	}
 	return game_mode
 }
+func base_win_check(k int, h int, p int) bool{
+	counter:=0
+	answer:=false
+	for i := 0; i < 3; i++ {
+		if game_board[i+k+h][i+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[p-i-1+k][i+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[i+k+h][0+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[i+k+h][1+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[i+k+h][2+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[0+k+h][i+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[1+k+h][i+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	for i := 0; i < 3; i++ {
+		if game_board[2+k+h][i+k+h] == point {
+			counter++
+		}
+	}
+	if counter == 3 {
+		answer = true
+	}
+	counter = 0
+	return answer
+}
 func win_check() bool {
-	answer := false
-	counter := 0
+	answer:=false
 	if board_size == 3 {
-		for i := 0; i < 3; i++ {
-			if game_board[i][i] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
+		if base_win_check(0, 0,3) == true {
 			answer = true
 		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[3-i-1][i] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[i][0] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[i][1] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[i][2] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[0][i] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[1][i] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
-		for i := 0; i < 3; i++ {
-			if game_board[2][i] == point {
-				counter++
-			}
-		}
-		if counter == 3 {
-			answer = true
-		}
-		counter = 0
 	}
 	if board_size == 4 {
 		for k := 0; k < 2; k++ {
 			for h := 0; h < 2; h++ {
-				for i := 0; i < 3; i++ {
-					if game_board[i+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
+				if base_win_check(k,h,3) == true {
 					answer = true
 				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[3-i-1+k][i+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[i+k+h][0+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[i+k+h][1+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[i+k+h][2+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[0+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[1+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 3; i++ {
-					if game_board[2+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 3 {
-					answer = true
-				}
-				counter = 0
 			}
 		}
-	}
+			}
 	if board_size == 6 {
-		for k := 0; k < 3; k++ {
-			for h := 0; h < 3; h++ {
-				for i := 0; i < 4; i++ {
-					if game_board[i+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
+		for k := 0; k < 2; k++ {
+			for h := 0; h < 2; h++ {
+				if base_win_check(k,h,4) == true {
 					answer = true
 				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[4-i-1+k][i+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[i+k+h][0+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[i+k+h][1+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[i+k+h][2+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[0+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[1+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
-				for i := 0; i < 4; i++ {
-					if game_board[2+k+h][i+k+h] == point {
-						counter++
-					}
-				}
-				if counter == 4 {
-					answer = true
-				}
-				counter = 0
 			}
 		}
 	}
-	//if board_size == 4 {
-	//	for h := 0; h < 2; h++ {
-	//		for k := 0; k < 0; k++ {
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[i+k][i+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 2; i >= 0; i-- {
-	//				if game_board[i+k][i+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[i+k][0+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[i+k][1+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[i+k][2+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[0+k][i+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[1+k][i+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//			for i := 0; i < 3; i++ {
-	//				if game_board[2+k][i+h] == point {
-	//					counter++
-	//				}
-	//			}
-	//			if counter == 3 {
-	//				answer = true
-	//			}
-	//			counter = 0
-	//		}
-	//	}
-	//}
 	return answer
 }
 func player_step() {
