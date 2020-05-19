@@ -13,8 +13,8 @@ type coord struct {
 }
 
 var board_size int
-var game_board [10][10]string
-var while_count = 1
+var game_board [7][7]string
+var while_count = true
 var player_choice int
 var point string
 var selected_coord coord
@@ -24,9 +24,15 @@ func board_size_choice() {
 	fmt.Println("Write size of board (supported 3, 4, 6): ")
 	fmt.Fscan(os.Stdin, &board_size)
 }
-func mode_choice () int{
-	fmt.Println("Choice game mode(1 - solo with AI, 2 - 1 vs 1 with ur friend):")
-	fmt.Fscan(os.Stdin, &game_mode)
+func mode_choice() int {
+	k := false
+	for k != true {
+		fmt.Println("Choice game mode(1 - solo with AI, 2 - 1 vs 1 with ur friend):")
+		fmt.Fscan(os.Stdin, &game_mode)
+		if game_mode == 1 || game_mode == 2 {
+			k = true
+		}
+	}
 	return game_mode
 }
 func win_check() bool {
@@ -343,27 +349,27 @@ func win_check() bool {
 	return answer
 }
 func player_step() {
-	can := 1
+	can := false
 	//Players time
-	for can != 0 {
+	for can != true {
 		fmt.Println()
 		coord_picking()
 		if can_place_point() == true {
 			game_board[selected_coord.X][selected_coord.Y] = point
 			fmt.Println(point)
-			can = 0
+			can = true
 		}
 	}
 }
 func ai_step() {
-	can := 1
+	can := false
 	//AI time
-	for can != 0 {
+	for can != true {
 		selected_coord.X = rand.Intn(board_size-0) + 0
 		selected_coord.Y = rand.Intn(board_size-0) + 0
 		if can_place_point() == true {
 			game_board[selected_coord.X][selected_coord.Y] = point
-			can = 0
+			can = true
 		}
 	}
 	show_board()
@@ -406,13 +412,13 @@ func coord_picking() coord {
 
 }
 func point_select() int {
-	for while_count == 1 {
+	for while_count == true {
 		fmt.Println("Write 1, to play by X, or write 2, to play by O")
 		fmt.Fscan(os.Stdin, &player_choice)
 		if player_choice != 1 && player_choice != 2 {
-			while_count = 1
+			while_count = true
 		} else {
-			while_count = 0
+			while_count = false
 		}
 	}
 	return player_choice
@@ -436,14 +442,15 @@ func main() {
 		point = "|O|"
 	}
 	fmt.Println("U picked " + point)
-	win := 0
-	for win != 1 {
+	win := false
+	for win != true {
 		player_step()
 		show_board()
 		if win_check() == true {
-			win = 1
+			win = true
 			fmt.Println()
 			fmt.Println(point + " Win!")
+			os.Exit(0)
 		}
 		fmt.Println()
 		//changing point
@@ -455,9 +462,10 @@ func main() {
 			show_board()
 		}
 		if win_check() == true {
-			win = 1
+			win = true
 			fmt.Println()
 			fmt.Println(point + " Win!")
+			os.Exit(0)
 		}
 		//Changing point again
 		point_swicher()
